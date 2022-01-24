@@ -1,0 +1,279 @@
+**********************************
+***setup enviornment
+***********************************
+
+
+install all dependencies automatically: npm i
+
+start the project: npm run start:dev
+
+
+
+
+
+***********************************
+***deployment
+***********************************
+
+
+
+npm run build:dev build production
+then,
+use s3 browser to deployment
+
+
+
+
+
+***********************************
+***problem solving
+***********************************
+
+loading  -  method 1
+    set up loading true or false
+    use conditional operator to do different command based on the loading value
+    import { Button, makeStyles, CircularProgress } from '@material-ui/core';
+    use CircularProgress to show the loading
+    e.g. propertyCard.tsx
+
+loading  - method 2  e.g. ../mobile/index 
+                {/* <Backdrop style={{ color: '#ffffff', zIndex: 999999 }} open={pageState.showLoading} onClick={() => {}}>
+                    <CircularProgress color="inherit" />
+                </Backdrop> */}
+        how to connect it with search street page laoding? ????? 
+
+
+popup/
+    use Dialog from '@material-ui/core'
+    e.g.
+    C:\Users\yangl\Documents\GitHub\homeon-mui\src\pages\PriceMap\components\popupComponent.tsx
+    other e.g.
+        C:\Users\yangl\Documents\GitHub\homeon-mui\src\pages\PriceMap\components\HelpComponent.tsx
+        C:\Users\yangl\Documents\GitHub\homeon-mui\src\pages\PriceMap\components\HelpComponentAuto.tsx
+
+
+
+Tips
+   1. how to display differnet content from one standard componet??
+    e.g.
+     C:\Users\yangl\Documents\GitHub\homeon-mui\src\pages\PropertyReport\ReportCards\Card11.tsx
+        line84 export const Card11 = rst.create<{ property: any; mobile?: boolean }>((ctx) => {
+        line279  <CardWithHeader header={props.mobile ? 'Card11_header_mobile' : 'Card11_header'}>
+     C:\Users\yangl\Documents\GitHub\homeon-mui\src\pages\mobile\component\streetDetails\houseStatistics.tsx
+        <Card11 property={pageState.propQL_result} mobile={true} />
+
+    set a props "mobile={true}" in the component that need to display a child
+    in the child component, add mobile?:boolean as a parameter
+    set conditional display using ternary operator
+
+    2. Display different content or different order in different languages
+        use getLanguage() and ternary operator
+        e.g.
+        {AppProvider.use().getLanguage() == 'zh' ?    C:\Users\yangl\Documents\GitHub\homeon-mui\src\pages\mobile\component\propertyCard.tsx
+
+    3. graphAPI.ts
+        add the varaible name in the file to fetch data from API
+        C:\Users\yangl\Documents\GitHub\homeon-mui\src\commons\graphqlClient\graphAPI.ts
+
+    4. Accordion
+        click to show details, and click again to conceal details
+        read the document to know the details: https://mui.com/api/accordion/
+        streetCard.tsx --> houseStatistics/apartmentStatistics used accordion
+        propertyCard, suburb, used inContent 
+
+
+    5. Tabs
+        react-best-Tabs
+        https://www.npmjs.com/package/react-best-tabs
+
+    6. useState()  -- a kind of hook
+
+        const [closeContent, setCloseContent] = useState(false);
+        const closeContentEvt = () => { setCloseContent(!closeContent);
+        这两行用来定义小三角（Accordion），点击是打开或关闭下面细节
+
+        showingDetails: inDetail用来标识二级卡片是否打开
+
+    7.
+    NaN: Not a number: As the name implies, it is used to denote that the value of an object is not a number. There are many ways that you can generate this error, one being invalid math opertaions such as 0/0 or sqrt(-1)
+    undefined: It means that the object doesn't have any value, therefore undefined. This occurs when you create a variable and don't assign a value to it.
+    null: It means that the object is empty and isn't pointing to any memory address.
+
+    8. conditional (ternary) operator
+
+        function example(…) {
+            return condition1 ? value1
+                : condition2 ? value2
+                : condition3 ? value3
+                : value4;
+        }
+
+        // Equivalent to:
+
+        function example(…) {
+            if (condition1) { return value1; }
+            else if (condition2) { return value2; }
+            else if (condition3) { return value3; }
+            else { return value4; }
+        }
+
+
+    9. sort 
+    date: 
+    TypeScript
+     array.sort((x, y) => +new Date(x.createdAt) - +new Date(y.createdAt));
+
+     javascript
+     const sortedActivities = activities.sort((a, b) => b.date - a.date)
+
+     10. if else: why can I omit the else in the code????
+     if () {
+        return ()
+     }
+     return ()
+
+     10. develop process
+       find the bootstrap for the render (child, sometimes father as well)
+       design interface props
+       design handler
+       handler function (in handler desing or in render part or using an utli)
+
+       11.
+       https://abstg.api.aihouse.io/graphql
+       modHeader extension
+       Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyNjEwNDkzODQxODYxNTA5MTMiLCJyb2xlcyI6eyIyIjoxNjQwOTM5ODIzMjUyfSwiaWF0IjoxNjQwMDc1ODUwLCJleHAiOjE2NDUyNTk4NTB9.ljvqhmDR-ewiBhvi58d6gy1jkCBgyD96DGDA2QGB_TU
+
+    12.
+    When transfering props between parent and child component, you can transfer the whole peoperty and than choose the ones you need in child component.
+    you don't need transfer one by one.
+
+    13.
+    RESTful API vs graphql
+
+    14
+     ctx: ConTeXt, the circumstances that form the setting for an event, statement, or idea, and in terms of which it can be fully understood.
+
+
+    15
+
+        returns a promise (probably; it could just be a "thenable"*). A promise is something that will be either resolved or rejected at a later point in time (typically**). then is used to hook up a handler that will be called when the promise is resolved (and optionally when it's rejected, if you pass a second function into then; otherwise you'd use catch).
+
+        In this case, that code says that when/if the promise returned by fetchComments resolves, use the resolution value to set the state of the React component using the comments property of that resolution value.
+
+        More about promises in this MDN article and in the Promises/A+ spec.
+
+        * See the Promises/A+ spec for what a "thenable" is.
+
+        ** If you use then on a promise that's already resolved or rejected, you're guaranteed by the native promises in JavaScript that your handler will still be called asynchronously. That wasn't always the case with some early promise-like implementations, which would either call your callback asynchronously (if the promise wasn't already settled) or synchronously (if it was), which was...chaotic and unhelpful. JavaScript's native promises and any really good promise library guarantees consistent callback behavior.
+
+
+16
+ues EventBus to transfer data from child to father components, or you can transfer data between any components
+example: tansfer the number of property to render  "top 5" in father component
+
+EventBus.dispatch()
+EventBus.on()
+
+read EventBus.ts 
+/**
+ * 这个是传递两个相对独立组件之间事件的中转站，
+ * 使用方法：在发布事件的组件中dispatch 事件以及相应参数
+ *           在接收事件的组件中监听on 事件以及做相应的处理
+ *           在组件卸载时， remove事件监听器
+ */
+export const EventBus = {
+    on(event, callback) {
+        document.addEventListener(event, (e) => callback(e.detail));
+    },
+    dispatch(event, data) {
+        document.dispatchEvent(new CustomEvent(event, { detail: data }));
+    },
+    remove(event, callback) {
+        document.removeEventListener(event, callback);
+    },
+};
+
+17
+transfer data from father to child components, use props
+you should define your variable to be state variabel so when the state has chabnged, the chiled component can be react accordingly.
+
+
+18 UTC time, 
+how to convert the UTC time to user's local time
+
+19 hook
+
+总结：解决比较房屋这里遇到的问题，问题原因（主要是自己对react的理解不够透彻），解决思路，学到的东西
+    useState is async, so it is usually used to re-render. 让useState实时变动的方法，有一些，可以调研和学习。
+    state variable v.s. varaible
+    it is a benefit to get data from API in father component
+
+
+
+
+
+***********************
+***css
+***********************
+1. flex:1 is the shorthand of flex-grow: 1
+   flex:2 and flex:1同时出现，表明两个flex宽度的比例
+
+
+
+
+
+
+****************************************
+***problems that need to be figured out
+*****************************************
+1. auto pretier
+2. how data work with API
+3. how to use developer's tool --> network on browser
+4. how to add the ranking of schools  -  research code of James
+5. how to add different size button in zh and en  - 解决
+6. how to override css setting (测试1108 no.12) - 暂时用!important解决了，但是还是需要找根本解决方案
+
+
+
+
+
+
+/codebuild/output/src290136110/src/src/pages/demo/TabDemo.tsx  
+TypeScript error in /codebuild/output/src290136110/src/src/pages/demo/TabDemo.tsx(17,27):  
+Argument of type '(theme: Theme) => { root: { textTransform: "none"; minWidth: number; fontWeight: FontWeight; marginRight: number; fontFamily: string; '&:hover': { color: string; opacity: number; }; '&$selected': { ...; }; '&:focus': { ...; }; }; selected: {}; }' is not assignable to parameter of type 'Styles<Theme, {}, "root" | "selected">'.  
+Type '(theme: Theme) => { root: { textTransform: "none"; minWidth: number; fontWeight: FontWeight; marginRight: number; fontFamily: string; '&:hover': { color: string; opacity: number; }; '&$selected': { ...; }; '&:focus': { ...; }; }; selected: {}; }' is not assignable to type 'StyleRulesCallback<Theme, {}, "root" | "selected">'.  
+Call signature return types '{ root: { textTransform: "none"; minWidth: number; fontWeight: FontWeight; marginRight: number; fontFamily: string; '&:hover': { color: string; opacity: number; }; '&$selected': { color: string; fontWeight: FontWeight; }; '&:focus': { ...; }; }; selected: {}; }' and 'Record<"root" | "selected", CSSProperties | CreateCSSProperties<{}> | PropsFunc<{}, CreateCSSProperties<{}>>>' are incompatible.  
+The types of 'root' are incompatible between these types.  
+Type '{ textTransform: "none"; minWidth: number; fontWeight: Property.FontWeight; marginRight: number; fontFamily: string; '&:hover': { color: string; opacity: number; }; '&$selected': { color: string; fontWeight: Property.FontWeight; }; '&:focus': { ...; }; }' is not assignable to type 'CSSProperties | CreateCSSProperties<{}> | PropsFunc<{}, CreateCSSProperties<{}>>'.  
+Type '{ textTransform: "none"; minWidth: number; fontWeight: Property.FontWeight; marginRight: number; fontFamily: string; '&:hover': { color: string; opacity: number; }; '&$selected': { color: string; fontWeight: Property.FontWeight; }; '&:focus': { ...; }; }' is not assignable to type 'CreateCSSProperties<{}>'.  
+Types of property 'fontWeight'
+
+ TypeScript error in C:/Users/junliu/SourceCode/AiHouse/homeon-mui/src/pages/Suburb/DrawerContent/FilterGroupResult.tsx(13,30):
+No overload matches this call.
+  Overload 1 of 2, '(style: Styles<Theme, {}, "title" | "root">, options?: Pick<WithStylesOptions<Theme>, "link" | "meta" | "media" | "name" | "flip" | "element" | "index" | "defaultTheme" | "generateId" | "classNamePrefix">): (props?: any) => Record<...>', gave the following error.
+    Argument of type '(theme: Theme) => { root: { height: string; width: string; display: string; flexDirection: "column"; }; title: { margin: number; color: string; fontWeight: FontWeight; }; }' is not assignable to parameter of type 'Styles<Theme, {}, "title" | "root">'.
+      Type '(theme: Theme) => { root: { height: string; width: string; display: string; flexDirection: "column"; }; title: { margin: number; color: string; fontWeight: FontWeight; }; }' is not assignable to type 'StyleRulesCallback<Theme, {}, "title" | "root">'.
+        Call signature return types '{ root: { height: string; width: string; display: string; flexDirection: "column"; }; title: { margin: number; color: string; fontWeight: FontWeight; }; }' and 'Record<"title" | "root", CSSProperties | CreateCSSProperties<{}> | PropsFunc<{}, CreateCSSProperties<{}>>>' are incompatible.
+          The types of 'title' are incompatible between these types.
+            Type '{ margin: number; color: string; fontWeight: Property.FontWeight; }' is not assignable to type 'CSSProperties | CreateCSSProperties<{}> | PropsFunc<{}, CreateCSSProperties<{}>>'.
+              Type '{ margin: number; color: string; fontWeight: Property.FontWeight; }' is not assignable to type 'CreateCSSProperties<{}>'.
+                Types of property 'fontWeight' are incompatible.
+                  Type 'FontWeight' is not assignable to type 'number | "-moz-initial" | "inherit" | "initial" | "revert" | "unset" | "bold" | "normal" | "bolder" | "lighter" | PropsFunc<{}, FontWeightProperty>'.
+                    Type 'string & {}' is not assignable to
+
+
+
+george.lujun.yang@gmail.com（请设置为正式注册账户），
+试用期已过账户：yanglujun66@gmail.com（这个现在就是这个状态，不用设置），
+过期正式会员账号：179780361@qq.com（请设置为过期正式会员）。
+
+
+https://abstg.api.aihouse.io/graphql
+ModHeader
+用modiHeader Extension 加一个header
+Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyNjEwNDkzODQxODYxNTA5MTMiLCJyb2xlcyI6eyIyIjoxNjQwOTM5ODIzMjUyfSwiaWF0IjoxNjQwMDc1ODUwLCJleHAiOjE2NDUyNTk4NTB9.ljvqhmDR-ewiBhvi58d6gy1jkCBgyD96DGDA2QGB_TU
+
+
+https://abstg.api.aihouse.io/Adjacent?distance=1km&lon=151.1304473876953&lat=-33.743263244628906&interval=12m&prop_type=House&prop_id=114100002386&report_house_value=0&prop_bed=0&prop_carpark=0&prop_bath=0
+https://abstg.api.aihouse.io/Adjacent?distance=1km&lon=-33.78747177&lat=151.07621765&interval=12m&prop_type=House&prop_id=114100002386&report_house_value=0&prop_bed=0&prop_carpark=0&prop_bath=0
+https://abstg.api.aihouse.io/Adjacent?distance=1km&lon=151.07621765&lat=-33.78747177=&interval=12m&prop_type=House&prop_id=114100002386&report_house_value=0&prop_bed=0&prop_carpark=0&prop_bath=0
