@@ -101,6 +101,7 @@ Tips
 
     8. conditional (ternary) operator
 
+Conditional chains
         function example(…) {
             return condition1 ? value1
                 : condition2 ? value2
@@ -116,6 +117,10 @@ Tips
             else if (condition3) { return value3; }
             else { return value4; }
         }
+
+        Conditional nest
+
+        
 
 
     9. sort 
